@@ -344,6 +344,18 @@ def print0(s):
         print(s)
 
 
+def set_seed(seed: int):
+    """Set random seed for reproducibility across torch, numpy, and Python random."""
+    import random
+
+    import numpy as np
+
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    np.random.seed(seed)
+    random.seed(seed)
+
+
 def configure_optimizers(
     model, weight_decay, learning_rate, betas, device_type, custom_lrs={}
 ):
