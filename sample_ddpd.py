@@ -79,6 +79,7 @@ def save_images(images, output_dir, class_labels=None):
     help="Specific class label to generate (optional)",
 )
 @click.option("--device", default="cuda", help="Device to run generation on")
+@click.option("--seed", default=None, type=int, help="Random seed for reproducibility")
 def sample(
     checkpoint,
     decoder_path,
@@ -88,8 +89,13 @@ def sample(
     output_dir,
     class_label,
     device,
+    seed,
 ):
     device = torch.device(device)
+
+    # Set seed for reproducibility if provided
+    if seed is not None:
+        set_seed(seed)
 
     # Load models
     print("Loading models...")
