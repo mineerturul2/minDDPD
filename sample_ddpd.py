@@ -6,7 +6,7 @@ import torch
 import torch.jit as jit
 from PIL import Image
 
-from train_ddpd import DDPDConfig, DDPDModel
+from train_ddpd import DDPDConfig, DDPDModel, set_seed
 
 
 def load_models(checkpoint_path, device):

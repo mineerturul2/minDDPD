@@ -17,7 +17,7 @@ torch.backends.cudnn.allow_tf32 = True
 
 from PIL import Image
 
-from model import DDPDConfig, DDPDModel, configure_optimizers, print0
+from model import DDPDConfig, DDPDModel, configure_optimizers, print0, set_seed
 
 MASK_IDX = 0
 
