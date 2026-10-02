@@ -260,6 +260,7 @@ def log_samples(planner, denoiser, device, sequence_length, num_samples=4, mnist
 @click.option("--wandb-name", default=None, help="Weights & Biases run name")
 @click.option("--mnist", default=True, help="Use MNIST dataset")
 @click.option("--ckpt-dir", default="checkpoints", help="Checkpoint directory")
+@click.option("--seed", default=None, type=int, help="Random seed for reproducibility")
 def train(
     batch_size,
     planner_lr,
@@ -277,7 +278,12 @@ def train(
     wandb_name,
     mnist,
     ckpt_dir,
+    seed,
 ):
+    # Set seed for reproducibility if provided
+    if seed is not None:
+        set_seed(seed)
+
     setup_distributed()
     local_rank = int(os.environ["LOCAL_RANK"])
     device = torch.device(f"cuda:{local_rank}")
